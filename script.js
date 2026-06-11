@@ -54,8 +54,74 @@ movieForm.addEventListener("submit", (event) => {
   const title = titleInput.value;
   const genre = genreInput.value;
 
-  console.log("title", title);
-  console.log("genre", genre);
+  // call the function and append the card
+  const card = createMovieCard(title, genre);
+  movieList.appendChild(card);
 
-  movieForm.reset(); 
+  movieForm.reset();
 });
+
+movieList.addEventListener("click", (event) => {
+  // if the click wasn't on a button, ignore it
+  if (event.target.tagName !== "BUTTON") return;
+
+  // get the whole card the button lives in
+  const card = event.target.closest("li");
+
+  // was it the remove button?
+  if (event.target.classList.contains("remove-btn")) {
+    card.remove();
+  }
+
+  // was it the watch button?
+  if (event.target.classList.contains("watch-btn")) {
+    card.classList.toggle("watched");
+
+    // update button text based on state
+    if (card.classList.contains("watched")) {
+      event.target.textContent = "Unmark Watched";
+    } else {
+      event.target.textContent = "Mark Watched";
+    }
+  }
+});
+
+function createMovieCard(title, genre) {
+    const card = document.createElement('li')
+    card.classList.add('movie-card')
+    card.setAttribute("data-genre", genre );
+
+    const infoDiv = document.createElement("div")
+    infoDiv.classList.add("movie-title")
+    titleSpan.textContent = title;
+    
+    const titleSpan = document.createElement("span")
+    titleSpan.classList.add("movie-title")
+    titleSpan.textContent = title;
+
+    const genreSpan = document.createElement("span")
+    genreSpan.classList.add("movie-genre")
+    genreSpan.textContent = genre || "No genre";
+
+    infoDiv.appendChild(titleSpan);
+    infoDiv.appendChild(genreSpan);
+
+    const actionsDiv = document.createElement("div");
+    actionsDiv.classList.add("movie-actions")
+
+    const watchBtn = doucment.createElement("button")
+    watchBtn.classList.add("watch-btn")
+    watchBtn.textContent = "Mark Watched";
+    
+    const removeBtn = doucment.createElement("button")
+    removeBtn.classList.add("remove-btn")
+    removeBtn.textContent = "remove";
+
+    actionsDiv.appendChild(watchBtn);
+    actionsDiv.appendChild(removeBtn);
+
+    card.appendChild(infoDiv);
+    card.appendChild(actionsDiv);
+
+    return card;
+}
