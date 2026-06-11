@@ -9,6 +9,7 @@ const clearWatchedBtn = document.getElementById("clear-watched-btn");
 
 const filterBtn = document.querySelectorAll(".filter-btn");
 
+
 // Change the app title
 appTitle.textContent = "My Movie Watchlist";
 
@@ -56,5 +57,5 @@ movieForm.addEventListener("submit", (event) => {
   console.log("title", title);
   console.log("genre", genre);
 
-  movieForm.reset();
+  movieForm.reset(); 
 });
