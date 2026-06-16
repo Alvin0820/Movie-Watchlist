@@ -29,4 +29,5 @@ main {
 /* Applied to cards that don't match the current filter — hides them */
 .filtered-out {
     display: none;
+    justify-content: center;
 }
